@@ -1,49 +1,58 @@
 <ul>
   <li>EMNLP 21, Types of Out-of-Distribution Texts and How to Detect Them</li>
+  <pre>
   이 논문은 자연어 처리 모델이 흔히 마주치는 out-of-distribution (OOD) 예제들을 배경 변화(background shift)와 의미 변화(semantic shift)로 분류하고, 이러한 유형의 OOD 데이터에 대해 모델 calibration 방법과 density estimation (언어 모델링) 방법이 어떻게 다른 행동을 보이는지 연구했습니다.
 14개의 영어 자연어 이해 데이터셋 쌍(in-distribution, out-of-distribution)에 대한 실험 결과, density estimation 방법이 배경 변화 상황에서는 calibration 방법보다 일관되게 우수한 성능을 보인 반면, 의미 변화 상황에서는 성능이 떨어졌습니다.
-또한 두 방법 모두 challenge 데이터셋의 예제들을 탐지하는 데 실패하는 경향을 보였는데, 이는 현재 방법들의 취약점을 보여줍니다.<br>
+또한 두 방법 모두 challenge 데이터셋의 예제들을 탐지하는 데 실패하는 경향을 보였는데, 이는 현재 방법들의 취약점을 보여줍니다.
 한 가지 방법으로 모든 상황에서 잘 작동하지는 않기 때문에, 이 결과는 서로 다른 OOD 탐지 방법을 평가할 때 OOD 예제에 대한 명시적 정의가 필요함을 시사합니다. 즉, OOD의 유형에 따라 적절한 탐지 방법을 선택하고 그에 맞는 벤치마크를 만드는 것이 중요합니다.
 요약하면 이 논문은 NLP 모델이 실제로 마주칠 수 있는 다양한 유형의 OOD 데이터를 분석하고, 그에 따른 탐지 방법의 장단점을 실험적으로 확인했다는 점에서 의의가 있습니다. 향후 OOD 탐지 기술 개발에 있어 OOD 유형에 대한 세부적인 정의와 그에 맞는 평가 지표 개발이 중요할 것으로 보입니다.
+  </pre>
   <li>facl23, effient OOD detection for seq2seq models</li>
+  <pre>
   이 논문은 sequence-to-sequence(seq2seq) 모델에서 out-of-domain(OOD) 샘플을 효율적으로 탐지하는 방법에 대한 연구입니다.
-주요 내용은 다음과 같습니다:<br>
-기계 번역, 텍스트 요약, 질의응답 등 3가지 sequence generation 태스크에 대해 실험을 수행했습니다.<br>
-In-domain 데이터와 out-of-domain 데이터 간 성능 차이를 비교했고, OOD 탐지의 필요성을 입증했습니다.<br>
-다양한 uncertainty estimation 기법들을 비교 분석했습니다. 특히 기존의 ensemble 기반 방법들과 MC dropout 기반 방법들은 계산량이 많은 단점이 있음을 지적했습니다.<br>
-Density 기반의 방법인 Mahalanobis Distance(MD)와 Robust Density Estimation(RDE)을 처음으로 seq2seq 모델에 적용하고, 이들이 기존 방법 대비 성능과 계산 효율 측면에서 우수함을 보였습니다.<br>
-Encoder에서 추출한 representation으로 MD와 RDE를 계산하는 것이 가장 좋은 성능을 냈습니다.<br>
-제안 방법은 번역, 요약, QA의 3가지 태스크에서 모두 ensemble 기반 방법보다 뛰어난 OOD 탐지 성능을 보였습니다.<br>
-제안 방법은 계산 비용 측면에서도 효율적이어서 실제 적용 가능성이 높습니다.<br>
+주요 내용은 다음과 같습니다:
+기계 번역, 텍스트 요약, 질의응답 등 3가지 sequence generation 태스크에 대해 실험을 수행했습니다.
+In-domain 데이터와 out-of-domain 데이터 간 성능 차이를 비교했고, OOD 탐지의 필요성을 입증했습니다.
+다양한 uncertainty estimation 기법들을 비교 분석했습니다. 특히 기존의 ensemble 기반 방법들과 MC dropout 기반 방법들은 계산량이 많은 단점이 있음을 지적했습니다.
+Density 기반의 방법인 Mahalanobis Distance(MD)와 Robust Density Estimation(RDE)을 처음으로 seq2seq 모델에 적용하고, 이들이 기존 방법 대비 성능과 계산 효율 측면에서 우수함을 보였습니다.
+Encoder에서 추출한 representation으로 MD와 RDE를 계산하는 것이 가장 좋은 성능을 냈습니다.
+제안 방법은 번역, 요약, QA의 3가지 태스크에서 모두 ensemble 기반 방법보다 뛰어난 OOD 탐지 성능을 보였습니다.
+제안 방법은 계산 비용 측면에서도 효율적이어서 실제 적용 가능성이 높습니다.
 이 연구는 seq2seq 모델의 uncertainty 추정과 OOD 탐지 분야에 density 기반 접근 방식을 도입해 의미있는 성과를 거두었다는 점에서 기여도가 높다고 평가할 수 있겠습니다.
   <li>AAAI 21, revisiting mahalanobis distance for transformer-based OOD detection</li>
-  이 논문은 대화 시스템에서 중요한 역할을 하는 out-of-domain(OOD) 발화 탐지 방법에 대해 다룹니다. 주요 내용은 다음과 같습니다.<br>
-1. OOD 발화 탐지 방법 비교 실험을 위해 CLINC150, ROSTD, SNIPS 등 3개의 intent 분류 데이터셋을 사용했습니다. bag-of-words부터 최신 pre-trained Transformer 모델까지 다양한 text representation 모델을 활용했습니다.<br>
-2. 실험 결과, fine-tuning된 Transformer 모델에 Mahalanobis distance를 적용하는 것이 가장 우수한 OOD 탐지 성능을 보였습니다. 특히 in-domain(ID) 데이터로 fine-tuning하는 것이 embedding space를 재구성해 성능 향상에 중요한 역할을 합니다.<br>
-3. 제안 방법은 모델 경량화(distillation)에도 robust합니다. Distilled 모델의 성능이 full-size 모델과 유사했습니다.<br>
-4. Fine-tuning된 Transformer는 ID 발화를 균질한(homogeneous) representation으로 mapping할 수 있습니다. 이는 OOD 발화와 기하학적 차이(disparity)를 만들어내고, 이를 Mahalanobis distance가 쉽게 포착할 수 있게 합니다.<br>
-5. 의미적으로 유사한 발화 중 하나는 ID이고 다른 하나는 OOD인 경우에는 여전히 어려움이 있습니다. 향후 intent 분류의 정확도와 OOD 탐지 성능 간의 trade-off를 고려한 연구가 필요합니다.<br>
+  <pre>
+  이 논문은 대화 시스템에서 중요한 역할을 하는 out-of-domain(OOD) 발화 탐지 방법에 대해 다룹니다. 주요 내용은 다음과 같습니다.
+1. OOD 발화 탐지 방법 비교 실험을 위해 CLINC150, ROSTD, SNIPS 등 3개의 intent 분류 데이터셋을 사용했습니다. bag-of-words부터 최신 pre-trained Transformer 모델까지 다양한 text representation 모델을 활용했습니다.
+2. 실험 결과, fine-tuning된 Transformer 모델에 Mahalanobis distance를 적용하는 것이 가장 우수한 OOD 탐지 성능을 보였습니다. 특히 in-domain(ID) 데이터로 fine-tuning하는 것이 embedding space를 재구성해 성능 향상에 중요한 역할을 합니다.
+3. 제안 방법은 모델 경량화(distillation)에도 robust합니다. Distilled 모델의 성능이 full-size 모델과 유사했습니다.
+4. Fine-tuning된 Transformer는 ID 발화를 균질한(homogeneous) representation으로 mapping할 수 있습니다. 이는 OOD 발화와 기하학적 차이(disparity)를 만들어내고, 이를 Mahalanobis distance가 쉽게 포착할 수 있게 합니다.
+5. 의미적으로 유사한 발화 중 하나는 ID이고 다른 하나는 OOD인 경우에는 여전히 어려움이 있습니다. 향후 intent 분류의 정확도와 OOD 탐지 성능 간의 trade-off를 고려한 연구가 필요합니다.
 즉, OOD 발화 탐지 성능 향상을 위해 Transformer 기반 모델을 ID 데이터로 fine-tuning하고, Mahalanobis distance를 활용하는 방법을 제안하고 있습니다.
+  </pre>
   <li>ACL 22, unsupervised NLI using PHL triplet generation</li>
+  <pre>
   이 논문은 자연어 추론(Natural Language Inference, NLI) 작업을 수행하는데 있어 레이블된 훈련 데이터가 전혀 없는 비지도 학습(unsupervised learning) 설정에서의 접근 방식을 다룹니다. 구체적으로 세 가지 비지도 학습 설정인 PH, P, NPH를 탐구하였는데, 이는 학습에 활용 가능한 레이블되지 않은 데이터의 정도에 따라 구분됩니다.
 이에 대한 해결책으로 전제(premise), 가설(hypothesis), 레이블(label)로 구성된 PHL 트리플릿을 생성하기 위한 절차적 데이터 생성(procedural data generation) 방식을 제안합니다. 이는 문장 변환 기법을 활용해 사람이 주석한 훈련 데이터가 필요없이 NLI 모델을 학습시키는 방법입니다. 
 여러 NLI 데이터셋에 대한 실험을 통해 제안된 방식이 PH, P, NPH 설정에서 각각 66.75%, 65.9%, 65.39%의 정확도를 달성해 기존 비지도 학습 방식 대비 뛰어난 성능을 보였습니다. 
 또한 제안 모델을 소량의 레이블된 데이터(예: 500개)로 추가 학습시키는 것이 처음부터 해당 데이터로만 학습시키는 것보다 12.2% 더 높은 정확도를 달성함을 보였습니다.  
-이러한 결과를 바탕으로 적은 양의 양질의 데이터를 수집하는 것이 대량의 약한 품질 데이터를 수집하는 것보다 더 효과적이라는 제안을 하고 있습니다. 즉, 제안된 비지도 학습 방식으로 NLI 모델을 먼저 학습시킨 후, 소량의 adversarial한 데이터로 모델을 개선하는 것이 최선의 데이터 수집 전략이 될 수 있음을 시사합니다.<br><br>
-  PH, P, NPH의 차이점:<br>
-  PH, P, NPH는 자연어 추론(NLI) 작업을 위한 비지도 학습 설정으로, 학습에 사용 가능한 레이블되지 않은 데이터의 정도에 따라 구분됩니다.<br>
-1. PH (Premise-Hypothesis) 설정:<br>
-- 전제(premise)와 가설(hypothesis) 쌍은 제공되지만, 정답 레이블은 제공되지 않습니다.<br>
-- 즉, 레이블되지 않은 전제-가설 쌍 데이터셋 {(P_i, H_i)}^M_i=1 이 주어집니다.<br>
-- 일반적인 비지도 학습 설정에 해당합니다.<br>
-2. P (Premise-only) 설정:<br>
-- 훈련 데이터셋의 전제(premise)만 제공됩니다. 즉, {(P_i)}^M_i=1 만 주어집니다.<br>
-- 가설이나 레이블은 제공되지 않아 PH 설정보다 더 어려운 조건입니다.<br>
-- 대규모 NLI 데이터셋 수집 과정을 반영한 설정으로, 크라우드 워커들에게 전제만 제공하고 각 레이블에 해당하는 가설을 작성하도록 하는 방식과 유사합니다.<br>
-3. NPH (No Premise-Hypothesis) 설정:<br>
-- 전제, 가설, 레이블 중 어떤 것도 제공되지 않습니다.<br>
-- 즉, 훈련 데이터셋의 어떤 부분도 주어지지 않아 세 가지 설정 중 가장 어려운 조건입니다.<br>
-- 테스트 데이터셋에 대한 추론은 필요하지만 그에 상응하는 훈련 데이터셋이 전혀 없는 상황을 가정합니다.<br>
+이러한 결과를 바탕으로 적은 양의 양질의 데이터를 수집하는 것이 대량의 약한 품질 데이터를 수집하는 것보다 더 효과적이라는 제안을 하고 있습니다. 즉, 제안된 비지도 학습 방식으로 NLI 모델을 먼저 학습시킨 후, 소량의 adversarial한 데이터로 모델을 개선하는 것이 최선의 데이터 수집 전략이 될 수 있음을 시사합니다.
+* PH, P, NPH의 차이점:
+  PH, P, NPH는 자연어 추론(NLI) 작업을 위한 비지도 학습 설정으로, 학습에 사용 가능한 레이블되지 않은 데이터의 정도에 따라 구분됩니다.
+1. PH (Premise-Hypothesis) 설정:
+- 전제(premise)와 가설(hypothesis) 쌍은 제공되지만, 정답 레이블은 제공되지 않습니다.
+- 즉, 레이블되지 않은 전제-가설 쌍 데이터셋 {(P_i, H_i)}^M_i=1 이 주어집니다.
+- 일반적인 비지도 학습 설정에 해당합니다.
+2. P (Premise-only) 설정:
+- 훈련 데이터셋의 전제(premise)만 제공됩니다. 즉, {(P_i)}^M_i=1 만 주어집니다.
+- 가설이나 레이블은 제공되지 않아 PH 설정보다 더 어려운 조건입니다.
+- 대규모 NLI 데이터셋 수집 과정을 반영한 설정으로, 크라우드 워커들에게 전제만 제공하고 각 레이블에 해당하는 가설을 작성하도록 하는 방식과 유사합니다.
+3. NPH (No Premise-Hypothesis) 설정:
+- 전제, 가설, 레이블 중 어떤 것도 제공되지 않습니다.
+- 즉, 훈련 데이터셋의 어떤 부분도 주어지지 않아 세 가지 설정 중 가장 어려운 조건입니다.
+- 테스트 데이터셋에 대한 추론은 필요하지만 그에 상응하는 훈련 데이터셋이 전혀 없는 상황을 가정합니다.
 위 세 가지 설정은 PH에서 P, 그리고 NPH로 갈수록 주어지는 정보가 줄어들어 작업의 난이도가 높아집니다. 본 논문에서는 각 설정의 어려움을 해결하기 위해 제한된 정보로부터 PHL 트리플릿을 생성하는 절차적 방법을 제안하고 있습니다.
+  </pre>
   <li></li>
+  <pre>
+  </pre>
 </ul>
