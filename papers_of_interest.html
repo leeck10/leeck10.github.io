@@ -16,5 +16,14 @@ Encoder에서 추출한 representation으로 MD와 RDE를 계산하는 것이 �
 제안 방법은 번역, 요약, QA의 3가지 태스크에서 모두 ensemble 기반 방법보다 뛰어난 OOD 탐지 성능을 보였습니다.<br>
 제안 방법은 계산 비용 측면에서도 효율적이어서 실제 적용 가능성이 높습니다.<br>
 이 연구는 seq2seq 모델의 uncertainty 추정과 OOD 탐지 분야에 density 기반 접근 방식을 도입해 의미있는 성과를 거두었다는 점에서 기여도가 높다고 평가할 수 있겠습니다.
+  <li>AAAI 21, revisiting mahalanobis distance for transformer-based OOD detection</li>
+  이 논문은 대화 시스템에서 중요한 역할을 하는 out-of-domain(OOD) 발화 탐지 방법에 대해 다룹니다. 주요 내용은 다음과 같습니다.<br>
+1. OOD 발화 탐지 방법 비교 실험을 위해 CLINC150, ROSTD, SNIPS 등 3개의 intent 분류 데이터셋을 사용했습니다. bag-of-words부터 최신 pre-trained Transformer 모델까지 다양한 text representation 모델을 활용했습니다.<br>
+2. 실험 결과, fine-tuning된 Transformer 모델에 Mahalanobis distance를 적용하는 것이 가장 우수한 OOD 탐지 성능을 보였습니다. 특히 in-domain(ID) 데이터로 fine-tuning하는 것이 embedding space를 재구성해 성능 향상에 중요한 역할을 합니다.<br>
+3. 제안 방법은 모델 경량화(distillation)에도 robust합니다. Distilled 모델의 성능이 full-size 모델과 유사했습니다.<br>
+4. Fine-tuning된 Transformer는 ID 발화를 균질한(homogeneous) representation으로 mapping할 수 있습니다. 이는 OOD 발화와 기하학적 차이(disparity)를 만들어내고, 이를 Mahalanobis distance가 쉽게 포착할 수 있게 합니다.<br>
+5. 의미적으로 유사한 발화 중 하나는 ID이고 다른 하나는 OOD인 경우에는 여전히 어려움이 있습니다. 향후 intent 분류의 정확도와 OOD 탐지 성능 간의 trade-off를 고려한 연구가 필요합니다.<br>
+즉, OOD 발화 탐지 성능 향상을 위해 Transformer 기반 모델을 ID 데이터로 fine-tuning하고, Mahalanobis distance를 활용하는 방법을 제안하고 있습니다.
+  <li></li>
   <li></li>
 </ul>
