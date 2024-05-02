@@ -8,12 +8,12 @@
   <li>facl23, effient OOD detection for seq2seq models</li>
   이 논문은 sequence-to-sequence(seq2seq) 모델에서 out-of-domain(OOD) 샘플을 효율적으로 탐지하는 방법에 대한 연구입니다.
 주요 내용은 다음과 같습니다:<br>
-기계 번역, 텍스트 요약, 질의응답 등 3가지 sequence generation 태스크에 대해 실험을 수행했습니다.
-In-domain 데이터와 out-of-domain 데이터 간 성능 차이를 비교했고, OOD 탐지의 필요성을 입증했습니다.
-다양한 uncertainty estimation 기법들을 비교 분석했습니다. 특히 기존의 ensemble 기반 방법들과 MC dropout 기반 방법들은 계산량이 많은 단점이 있음을 지적했습니다.
-Density 기반의 방법인 Mahalanobis Distance(MD)와 Robust Density Estimation(RDE)을 처음으로 seq2seq 모델에 적용하고, 이들이 기존 방법 대비 성능과 계산 효율 측면에서 우수함을 보였습니다.
-Encoder에서 추출한 representation으로 MD와 RDE를 계산하는 것이 가장 좋은 성능을 냈습니다.
-제안 방법은 번역, 요약, QA의 3가지 태스크에서 모두 ensemble 기반 방법보다 뛰어난 OOD 탐지 성능을 보였습니다.
+기계 번역, 텍스트 요약, 질의응답 등 3가지 sequence generation 태스크에 대해 실험을 수행했습니다.<br>
+In-domain 데이터와 out-of-domain 데이터 간 성능 차이를 비교했고, OOD 탐지의 필요성을 입증했습니다.<br>
+다양한 uncertainty estimation 기법들을 비교 분석했습니다. 특히 기존의 ensemble 기반 방법들과 MC dropout 기반 방법들은 계산량이 많은 단점이 있음을 지적했습니다.<br>
+Density 기반의 방법인 Mahalanobis Distance(MD)와 Robust Density Estimation(RDE)을 처음으로 seq2seq 모델에 적용하고, 이들이 기존 방법 대비 성능과 계산 효율 측면에서 우수함을 보였습니다.<br>
+Encoder에서 추출한 representation으로 MD와 RDE를 계산하는 것이 가장 좋은 성능을 냈습니다.<br>
+제안 방법은 번역, 요약, QA의 3가지 태스크에서 모두 ensemble 기반 방법보다 뛰어난 OOD 탐지 성능을 보였습니다.<br>
 제안 방법은 계산 비용 측면에서도 효율적이어서 실제 적용 가능성이 높습니다.<br>
 이 연구는 seq2seq 모델의 uncertainty 추정과 OOD 탐지 분야에 density 기반 접근 방식을 도입해 의미있는 성과를 거두었다는 점에서 기여도가 높다고 평가할 수 있겠습니다.
   <li></li>
