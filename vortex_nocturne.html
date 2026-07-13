@@ -2705,20 +2705,52 @@ function buyItem(k){
   G.maka-=it.price; G.items[k]=(G.items[k]||0)+1;
   openShop();
 }
-function useItemField(k){
-  const it=ITEMS[k];
-  const units=allyUnits();
+let FIELD_ITEM=null;
+function useItemField(k){ FIELD_ITEM=k; itemTargetModal(); }
+function fieldUnits(){ return [G.hero].concat(G.demons); }  // 대기 중인 악마 포함 전원
+function itemTargetModal(msg){
+  const k=FIELD_ITEM, it=ITEMS[k];
+  const cnt=G.items[k]||0;
+  const inParty=i=> i===0 || G.active.includes(i-1);
+  const rows=fieldUnits().map((u,i)=>{
+    let usable;
+    if(it.revive) usable = u.hp<=0;
+    else if(it.heal) usable = u.hp>0 && u.hp<u.maxhp;
+    else if(it.mp) usable = u.hp>0 && u.mp<u.maxmp;
+    else usable=false;
+    usable = usable && cnt>0;
+    return `<div class="statline" style="${usable?'':'opacity:.45;'}align-items:center;">
+      <span style="display:flex;align-items:center;gap:8px;">${demonSVG(u,34)}
+        <span>${esc(u.n)} <span class="dim" style="font-size:10px">${i===0?'반마':u.race+' · '+(inParty(i)?'참전':'대기')}</span>${u.hp<=0?' <span class="red" style="font-size:10px">전투불능</span>':''}<br>
+        <span class="dim" style="font-size:10px">HP ${u.hp}/${u.maxhp} · MP ${u.mp}/${u.maxmp}</span></span></span>
+      <span>${usable?`<button class="small primary" onclick="applyFieldItem(${i})">사용</button>`:''}</span></div>`;
+  }).join('');
+  showModal(`${k} — 대상 선택 (남은 ${cnt}개)`,
+    (msg?`<p class="green" style="margin-bottom:8px;border:1px solid #2a4a34;padding:6px 10px;background:rgba(79,174,98,0.08)">${msg}</p>`:'')+
+    `<p class="dim" style="font-size:11px;margin-bottom:6px">${ITEMS[k].d} 대기 중인 동료 악마에게도 사용할 수 있습니다.</p>
+     <div style="max-height:46vh;overflow-y:auto">${rows}</div>`,
+    [{t:'◂ 상점으로', f:openShop}, {t:'닫기', f:()=>{ closeModal(); renderHud(); }}]);
+}
+function applyFieldItem(i){
+  const k=FIELD_ITEM, it=ITEMS[k];
+  if(!G.items[k]){ itemTargetModal('남은 개수가 없다.'); return; }
+  const u = i===0 ? G.hero : G.demons[i-1];
+  if(!u){ itemTargetModal(); return; }
+  let msg='';
   if(it.revive){
-    const dead=units.filter(u=>u.hp<=0);
-    if(!dead.length){ return; }
-    G.items[k]--; dead[0].hp=Math.floor(dead[0].maxhp*it.revive);
-  } else {
-    const t=units.slice().sort((x,y)=>(x.hp/x.maxhp)-(y.hp/y.maxhp))[0];
-    G.items[k]--;
-    if(it.heal) t.hp=Math.min(t.maxhp,t.hp+it.heal);
-    if(it.mp) t.mp=Math.min(t.maxmp,t.mp+it.mp);
-  }
-  openShop();
+    if(u.hp>0){ itemTargetModal(); return; }
+    u.hp=Math.floor(u.maxhp*it.revive);
+    msg=`${esc(u.n)}이(가) 되살아났다! (HP ${u.hp}/${u.maxhp})`;
+  } else if(it.heal){
+    const before=u.hp; u.hp=Math.min(u.maxhp,u.hp+it.heal);
+    msg=`${esc(u.n)}의 HP가 <b>${u.hp-before}</b> 회복되었다. (${before} → ${u.hp})`;
+  } else if(it.mp){
+    const before=u.mp; u.mp=Math.min(u.maxmp,u.mp+it.mp);
+    msg=`${esc(u.n)}의 MP가 <b>${u.mp-before}</b> 회복되었다. (${before} → ${u.mp})`;
+  } else { itemTargetModal(); return; }
+  G.items[k]--;
+  sfx('heal');
+  itemTargetModal(msg);
 }
 
 /* ── 세이브 ── */
